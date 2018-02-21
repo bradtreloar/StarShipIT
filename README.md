@@ -14,6 +14,7 @@ This library only implements the Address Validation and Shipping Rates endpoints
 This library connects to the APi using a WebServiceClient object
 
 Your API key is found here: https://app.starshipit.com/Members/Settings/API.aspx
+
 Your Developer subscription key is found here: https://developers.starshipit.com/developer (You'll need a developer login for this)
 
 ```php
