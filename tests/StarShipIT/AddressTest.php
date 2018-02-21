@@ -31,7 +31,7 @@ class AddressTest extends TestCase
   public function testAssoc() {
     $testAddress = [
       "street"    => "Parliament Drive",
-      "suburb"    => "Canberra",
+      "suburb"    => "Capital Hill",
       "city"      => "",
       "state"     => "ACT",
       "post_code" => "2600",
