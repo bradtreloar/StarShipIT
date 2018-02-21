@@ -17,7 +17,6 @@ class Address
   // address suggestions
   public $suggestions;
 
-
   public function __construct($address) {
     $this->orderId  = isset($address['order_id'])  ? $address['order_id'] : null;
     $this->street   = isset($address['street'])    ? $address['street'] : null;
@@ -32,6 +31,12 @@ class Address
 
   /**
    * Builds an assoc array from this address
+   * 
+   * @param boolean $countryCode
+   *    if true, returns country_code in array instead of country
+   * 
+   * @return array
+   *    The address as an associative array
    */
   public function getAssoc($countryCode = false) {
     $address = array();

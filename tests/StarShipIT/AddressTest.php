@@ -6,28 +6,35 @@ use Treloar\StarShipIT\Address;
 
 class AddressTest extends TestCase
 {
+  /**
+   * Tests whether Address returns correct country code
+   * given a country name
+   */
   public function testCountryCode() {
     // try an easy one
-    $address = new Address([ "country"   => "Australia" ]);
+    $address = new Address([ "country" => "Australia" ]);
     $this->assertEquals('AU', $address->getCountryCode());
 
-    // try a trickier one
-    $address = new Address([ "country"   => "Lao People's Democratic Republic" ]);
+    // try one with spaces and an apostrophe
+    $address = new Address([ "country" => "Lao People's Democratic Republic" ]);
     $this->assertEquals('LA', $address->getCountryCode());
 
-    // send a dud
-    $address = new Address([ "country"   => "Autobot Moon Base One" ]);
+    // try a dud
+    $address = new Address([ "country" => "Autobot Moon Base One" ]);
     $this->assertEquals(false, $address->getCountryCode());
   }
 
+  /**
+   * Tests whether Address returns associative array
+   * of itself, both with country name and ISO ALPHA-2 country code
+   */
   public function testAssoc() {
-    // try an easy one
     $testAddress = [
-      "street"    => "125 O'Sullivan Beach Road",
-      "suburb"    => "Lonsdale",
+      "street"    => "Parliament Drive",
+      "suburb"    => "Canberra",
       "city"      => "",
-      "state"     => "SA",
-      "post_code" => "5160",
+      "state"     => "ACT",
+      "post_code" => "2600",
       "country"   => "Australia"
     ];
 

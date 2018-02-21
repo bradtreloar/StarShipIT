@@ -15,11 +15,11 @@ class WebServiceClient
   protected $apimKey;
 
   /**
-   * @param $apiKey
+   * @param string $apiKey
    *    API key belonging to a StarShipIT account
-   * @param $apimKey   
+   * @param string $apimKey   
    *    Subscription key belonging to a StarShipIT account subscription
-   * @param $uri   
+   * @param string $uri
    *    The base URI for the API
    */
   public function __construct($apiKey, $apimKey, $uri) {
@@ -41,7 +41,7 @@ class WebServiceClient
    * @param $body
    *    The data to be sent with the request
    * 
-   * @return
+   * @return array
    *    The response data
    */
   public function request($method, $path, $options) {
@@ -58,9 +58,17 @@ class WebServiceClient
 
   /**
    * Calls the Shipping Rates endpoint
+   * 
+   * @param Treloar\StarShipIT\Address $address
+   *    The destination address
+   * @param float $weight
+   *    The total weight in kilograms
    */
   public function getRates($address, $weight) {
-    $query = array_merge($address->getAssoc(true), [ 'weight' => $weight ]);
+    $query = array_merge(
+      $address->getAssoc(true), // need country_code, not country's name, in array
+      [ 'weight' => $weight ]
+    );
     // send request
     $response = $this->request('GET', 'rates', [ 'query' => $query ]);
     $data = json_decode($response->getBody(), true);
@@ -80,9 +88,11 @@ class WebServiceClient
    * Calls the Address Validation endpoint.
    * Adds suggestions to address if any are returned.
    * 
-   * @param Treloar\StarShipIT\Address the address to validate
+   * @param Treloar\StarShipIT\Address $address 
+   *    The address to validate
    * 
-   * @return boolean true if the address is valid
+   * @return boolean
+   *    The address's validity
    */
   public function validateAddress(&$address) {
     // send request

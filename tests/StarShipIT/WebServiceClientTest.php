@@ -7,6 +7,10 @@ use Treloar\StarShipIT\WebServiceClient;
 
 class WebServiceClientTest extends TestCase
 {
+  /**
+   * Initialises WebServiceClient to be reused
+   * across multiple tests
+   */
   protected function setUp() {
     // initialise the client with dev credentials
     // defined as constants in bootstrap file
@@ -18,10 +22,11 @@ class WebServiceClientTest extends TestCase
    * address that provides the minimum required fields
    */
   public function testSuggestion() {
-    
+    // this address contains the minimum required fields
+    // to return a suggestion from the server
     $address = new Address([
-      "street"    => "125 O'Sullivan Beach Road",
-      "post_code" => "5160",
+      "street"    => "Parliament Drive",
+      "post_code" => "2600",
       "country"   => "Australia",
     ]);
 
@@ -33,11 +38,11 @@ class WebServiceClientTest extends TestCase
     // the server should return a single suggestion
     $expectedSuggestions = [
       [
-        "street"    => "125 O'Sullivan Beach Road",
-        "suburb"    => "Lonsdale",
+        "street"    => "Parliament Drive",
+        "suburb"    => "Capital Hill",
         "city"      => "",
-        "state"     => "SA",
-        "post_code" => "5160",
+        "state"     => "ACT",
+        "post_code" => "2600",
         "country"   => "Australia"
       ],
     ];
@@ -53,7 +58,7 @@ class WebServiceClientTest extends TestCase
     // an address that should fail to return any suggestions
     // since it lacks a postcode
     $address = new Address([
-      "street"    => "125 O'Sullivan Beach Road",
+      "street"    => "Parliament Drive",
       "country"   => "Australia",
     ]);
 
@@ -73,11 +78,11 @@ class WebServiceClientTest extends TestCase
   public function testRates() {
     // a known valid address
     $address = new Address([
-      "street"    => "125 O'Sullivan Beach Road",
-      "suburb"    => "Lonsdale",
+      "street"    => "Parliament Drive",
+      "suburb"    => "Capital Hill",
       "city"      => "",
-      "state"     => "SA",
-      "post_code" => "5160",
+      "state"     => "ACT",
+      "post_code" => "2600",
       "country"   => "Australia"
     ]);
 
