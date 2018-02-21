@@ -85,9 +85,8 @@ class WebServiceClient
    * @return boolean true if the address is valid
    */
   public function validateAddress(&$address) {
-    $query = array_merge($address->getAssoc(true), [ 'weight' => $weight ]);
     // send request
-    $response = $this->request('GET', 'address/validate', [ 'query' => $query ]);
+    $response = $this->request('GET', 'address/validate', [ 'query' => $address->getAssoc() ]);
     $data = json_decode($response->getBody(), true);
 
     if ($data['success']) {

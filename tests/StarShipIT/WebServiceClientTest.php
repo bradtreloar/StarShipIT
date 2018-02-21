@@ -9,11 +9,8 @@ class WebServiceClientTest extends TestCase
 {
   protected function setUp() {
     // initialise the client with dev credentials
-    $this->client = new WebServiceClient(
-      'fa1bd2ea6f514ec694452d088ace12ca', // Trial account API key
-      'a2b0680d463b47adaa7a068202837dd4', // Development Subscription key
-      'https://api.starshipit.com/api/'
-    );
+    // defined as constants in bootstrap file
+    $this->client = new WebServiceClient(API_KEY, APIM_KEY, 'https://api.starshipit.com/api/');
   }
 
   /**
