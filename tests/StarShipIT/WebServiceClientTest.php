@@ -2,6 +2,7 @@
 namespace Treloar\StarShipIT;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Constraint\IsType as PHPUnit_IsType;
 use Treloar\StarShipIT\Address;
 use Treloar\StarShipIT\WebServiceClient;
 
@@ -88,6 +89,6 @@ class WebServiceClientTest extends TestCase
 
     $rates = $this->client->getRates($address, 25.0);
     // check if an array was returned
-    $this->assertInternalType($rates, PHPUnit_IsType::TYPE_ARRAY);
+    $this->assertInternalType(PHPUnit_IsType::TYPE_ARRAY, $rates);
   }
 }
