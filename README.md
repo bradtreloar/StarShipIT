@@ -5,7 +5,7 @@ StarShipIT API PHP library
 
 This is a PHP client library for the StarShipIT. API docs are here: https://developers.starshipit.com/
 
-This library only implements the Address Validation and Shipping Rates endpoints.
+This library only implements the Address Validation, Delivery Services and Shipping Rates endpoints.
 
 ## Usage
 
@@ -51,6 +51,18 @@ if (!$is_valid) {
 
 ?>
 ```
+
+### Delivery Services
+
+```php
+<?php
+
+$weight = 25.0 // kilograms
+$services = $client->getServices($address, $weight);
+
+?>
+```
+
 
 ### Rates Calculation
 
