@@ -85,6 +85,34 @@ class WebServiceClient
   }
 
   /**
+   * Calls the Delivery Services endpoint
+   * 
+   * @param Treloar\StarShipIT\Address $address
+   *    The destination address
+   * @param float $weight
+   *    The total weight in kilograms
+   */
+  public function getServices($address, $weight) {
+    $query = array_merge(
+      $address->getAssoc(true), // need country_code, not country's name, in array
+      [ 'weight' => $weight ]
+    );
+    // send request
+    $response = $this->request('GET', 'deliveryservices', [ 'query' => $query ]);
+    $data = json_decode($response->getBody(), true);
+
+    if ($data['success']) {
+      return $data['services'];
+    }
+    else {
+      throw new RequestFailedException(
+        'The Delivery Services API call was unsuccessful',
+        $data['errors']
+      );
+    }
+  }
+
+  /**
    * Calls the Address Validation endpoint.
    * Adds suggestions to address if any are returned.
    * 
